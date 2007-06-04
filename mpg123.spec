@@ -1,6 +1,6 @@
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	0.65
+Version:	0.66
 Release: 	%mkrel 1
 Group:		Sound
 BuildRequires:	libalsa-devel
