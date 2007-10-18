@@ -1,16 +1,14 @@
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	0.66
-Release: 	%mkrel 2
+Version:	0.67
+Release:	%mkrel 1
+License:	LGPLv2+
 Group:		Sound
-BuildRequires:	libalsa-devel
-Url:		http://www.mpg123.de/
-
+Url:		http://www.mpg123.de
 Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version.tar.bz2
 Source1:	mp3license.tar.bz2
-
-License:	LGPL
-Buildroot:	%_tmppath/%name-%version-root
+BuildRequires:	libalsa-devel
+Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Mpg123 is a fast, free and portable MPEG audio player for Unix.
@@ -20,7 +18,7 @@ is required. Mono and/or reduced quality playback (22 kHz or
 11 kHz) is possible on slow CPUs (like Intel 486).
 
 For information on the MP3 License, please visit:
-http://www.mpeg.org/
+http://www.mpeg.org
 
 %prep
 
@@ -28,22 +26,22 @@ http://www.mpeg.org/
 rm -f doc//README.WIN32
 
 %build
-%configure2_5x
+%configure2_5x \
+	--with-audio=alsa
+
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT/ 
+rm -rf %{buildroot}
 %makeinstall_std
 
 %clean
-rm -r $RPM_BUILD_ROOT
+rm -r %{buildroot}
 
 %files 
-%defattr(0644,root,root,755)
+%defattr(-,root,root)
 %doc doc/* NEWS README AUTHORS ChangeLog
 %doc mp3license
 %defattr (-,root,root)
 %{_bindir}/*
 %{_mandir}/man1/*
-
-
