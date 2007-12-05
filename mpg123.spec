@@ -12,6 +12,7 @@ Url:		http://www.mpg123.de
 Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version%prerel.tar.bz2
 Source1:	mp3license.tar.bz2
 BuildRequires:	libalsa-devel
+BuildRequires:	libltdl-devel
 Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
