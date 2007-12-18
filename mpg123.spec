@@ -13,6 +13,11 @@ Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version%prerel.tar.bz
 Source1:	mp3license.tar.bz2
 BuildRequires:	libalsa-devel
 BuildRequires:	libltdl-devel
+BuildRequires:	libjack-devel
+BuildRequires:	libnas-devel
+BuildRequires:	libportaudio-devel
+BuildRequires:	libpulseaudio-devel
+BuildRequires:	libSDL-devel
 
 %description
 Mpg123 is a fast, free and portable MPEG audio player for Unix.
@@ -23,6 +28,68 @@ is required. Mono and/or reduced quality playback (22 kHz or
 
 For information on the MP3 License, please visit:
 http://www.mpeg.org
+
+%package jack
+Group: Sound
+Summary: Jack audio output plugin for mpg123
+Requires: %name = %version
+
+%description jack
+Mpg123 is a fast, free and portable MPEG audio player for Unix.
+It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
+full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
+is required. Mono and/or reduced quality playback (22 kHz or
+11 kHz) is possible on slow CPUs (like Intel 486).
+
+For information on the MP3 License, please visit:
+http://www.mpeg.org
+
+
+%package portaudio
+Group: Sound
+Summary: Portaudio output plugin for mpg123
+Requires: %name = %version
+
+%description portaudio
+Mpg123 is a fast, free and portable MPEG audio player for Unix.
+It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
+full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
+is required. Mono and/or reduced quality playback (22 kHz or
+11 kHz) is possible on slow CPUs (like Intel 486).
+
+For information on the MP3 License, please visit:
+http://www.mpeg.org
+
+%package nas
+Group: Sound
+Summary: NAS audio output plugin for mpg123
+Requires: %name = %version
+
+%description nas
+Mpg123 is a fast, free and portable MPEG audio player for Unix.
+It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
+full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
+is required. Mono and/or reduced quality playback (22 kHz or
+11 kHz) is possible on slow CPUs (like Intel 486).
+
+For information on the MP3 License, please visit:
+http://www.mpeg.org
+
+%package sdl
+Group: Sound
+Summary: SDL audio output plugin for mpg123
+Requires: %name = %version
+
+%description sdl
+Mpg123 is a fast, free and portable MPEG audio player for Unix.
+It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
+full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
+is required. Mono and/or reduced quality playback (22 kHz or
+11 kHz) is possible on slow CPUs (like Intel 486).
+
+For information on the MP3 License, please visit:
+http://www.mpeg.org
+
 
 %package -n %libname
 Group:System/Libraries
@@ -60,8 +127,7 @@ http://www.mpeg.org
 rm -f doc//README.WIN32
 
 %build
-%configure2_5x \
-	--with-audio=alsa
+%configure2_5x --with-default-audio=pulse
 
 %make
 
@@ -82,7 +148,27 @@ rm -r %{buildroot}
 %defattr (-,root,root)
 %{_bindir}/*
 %{_mandir}/man1/*
-%_libdir/%name
+%dir %_libdir/%name
+%_libdir/%name/output_alsa*
+%_libdir/%name/output_dummy*
+%_libdir/%name/output_oss*
+%_libdir/%name/output_pulse*
+
+%files jack
+%defattr(-,root,root)
+%_libdir/%name/output_jack*
+
+%files nas
+%defattr(-,root,root)
+%_libdir/%name/output_nas*
+
+%files portaudio
+%defattr(-,root,root)
+%_libdir/%name/output_portaudio*
+
+%files sdl
+%defattr(-,root,root)
+%_libdir/%name/output_sdl*
 
 %files -n %libname
 %defattr(-,root,root)
