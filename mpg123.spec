@@ -1,4 +1,4 @@
-%define prerel rc2
+%define prerel rc3
 %define major 0
 %define libname %mklibname mpg123_ %major
 %define develname %mklibname -d mpg123
