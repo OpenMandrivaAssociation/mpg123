@@ -1,18 +1,15 @@
-%define prerel rc3
 %define major 0
 %define libname %mklibname mpg123_ %major
 %define develname %mklibname -d mpg123
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.0
-Release:	%mkrel 0.%prerel.2
+Version:	1.0.0
+Release:	%mkrel 1
 License:	LGPLv2+
 Group:		Sound
 Url:		http://www.mpg123.de
-Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version%prerel.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version.tar.bz2
 Source1:	mp3license.tar.bz2
-#gw: https://sourceforge.net/tracker/?func=detail&atid=733194&aid=1853466&group_id=135704
-Patch: mpg123-1.0rc3-pulse.patch
 BuildRequires:	libalsa-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libjack-devel
@@ -125,8 +122,7 @@ http://www.mpeg.org
 
 %prep
 
-%setup -q -n %name-%version%prerel -a 1
-%patch -p1 -b .pulse
+%setup -q -n %name-%version -a 1
 rm -f doc//README.WIN32
 
 %build
