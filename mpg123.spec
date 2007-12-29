@@ -3,7 +3,7 @@
 %define develname %mklibname -d mpg123
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.0.0
+Version:	1.0.1
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		Sound
