@@ -7,6 +7,7 @@ Version:	1.2.0
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		Sound
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Url:		http://www.mpg123.de
 Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version.tar.bz2
 Source1:	mp3license.tar.bz2
