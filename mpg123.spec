@@ -1,14 +1,14 @@
 %define major 0
 %define libname %mklibname mpg123_ %major
 %define develname %mklibname -d mpg123
+
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.2.1
+Version:	1.3.0
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		Sound
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Url:		http://www.mpg123.de
+URL:		http://www.mpg123.de
 Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version.tar.bz2
 Source1:	mp3license.tar.bz2
 BuildRequires:	libalsa-devel
@@ -19,6 +19,7 @@ BuildRequires:	libnas-devel
 BuildRequires:	libportaudio-devel
 BuildRequires:	libpulseaudio-devel
 BuildRequires:	libSDL-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Mpg123 is a fast, free and portable MPEG audio player for Unix.
