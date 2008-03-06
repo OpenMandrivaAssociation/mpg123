@@ -5,7 +5,7 @@
 Summary:	MPEG audio player
 Name:		mpg123
 Version:	1.3.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv2+
 Group:		Sound
 URL:		http://www.mpg123.de
@@ -22,6 +22,21 @@ BuildRequires:	libSDL-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
+Mpg123 is a fast, free and portable MPEG audio player for Unix.
+It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
+full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
+is required. Mono and/or reduced quality playback (22 kHz or
+11 kHz) is possible on slow CPUs (like Intel 486).
+
+For information on the MP3 License, please visit:
+http://www.mpeg.org
+
+%package pulse
+Group: Sound
+Summary: Pulse audio output plugin for mpg123
+Requires: %name = %version
+
+%description pulse
 Mpg123 is a fast, free and portable MPEG audio player for Unix.
 It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
 full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
@@ -158,7 +173,7 @@ http://www.mpeg.org
 rm -f doc//README.WIN32
 
 %build
-%configure2_5x --with-default-audio=pulse
+%configure2_5x --with-default-audio=alsa
 
 %make
 
@@ -183,6 +198,10 @@ rm -r %{buildroot}
 %_libdir/%name/output_alsa*
 %_libdir/%name/output_dummy*
 %_libdir/%name/output_oss*
+
+
+%files pulse
+%defattr(-,root,root)
 %_libdir/%name/output_pulse*
 
 %files jack
