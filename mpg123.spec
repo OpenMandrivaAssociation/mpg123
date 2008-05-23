@@ -5,7 +5,7 @@
 Summary:	MPEG audio player
 Name:		mpg123
 Version:	1.4.3
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv2+
 Group:		Sound
 URL:		http://www.mpg123.de
@@ -173,7 +173,6 @@ http://www.mpeg.org
 rm -f doc//README.WIN32
 
 %build
-%define _disable_ld_no_undefined 1
 %configure2_5x --with-default-audio=alsa
 
 %make
