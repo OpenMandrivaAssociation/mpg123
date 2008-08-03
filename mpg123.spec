@@ -4,12 +4,12 @@
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.4.3
-Release:	%mkrel 2
+Version:	1.5.0
+Release:	%mkrel 1
 License:	LGPLv2+
 Group:		Sound
 URL:		http://www.mpg123.de
-Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version.tar.gz
 Source1:	mp3license.tar.bz2
 BuildRequires:	libalsa-devel
 BuildRequires:	libarts-devel kdelibs-common
@@ -173,7 +173,12 @@ http://www.mpeg.org
 rm -f doc//README.WIN32
 
 %build
-%configure2_5x --with-default-audio=alsa
+export PATH="$PATH:/opt/kde3/bin"
+
+%configure2_5x \
+    --with-default-audio=alsa \
+    --enable-ipv6=yes \
+    --enable-network=yes
 
 %make
 
