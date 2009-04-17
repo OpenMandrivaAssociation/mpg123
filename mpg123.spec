@@ -20,6 +20,7 @@ BuildRequires:	libportaudio-devel
 BuildRequires:	libpulseaudio-devel
 BuildRequires:	libSDL-devel
 BuildRequires:  esound-devel
+BuildRequires:  zlib-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
