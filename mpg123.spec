@@ -4,14 +4,13 @@
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.7.3
+Version:	1.8.0
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		Sound
 URL:		http://www.mpg123.de
 Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version.tar.bz2
 Source1:	mp3license.tar.bz2
-Patch0:		mpg123-1.7.2-no_libltdl.diff
 BuildRequires:	libalsa-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libjack-devel
@@ -157,8 +156,6 @@ http://www.mpeg.org
 %prep
 
 %setup -q -n %name-%version -a 1
-%patch0 -p0
-rm -rf libltdl
 rm -f doc//README.WIN32
 
 %build
