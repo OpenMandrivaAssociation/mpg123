@@ -5,7 +5,7 @@
 Summary:	MPEG audio player
 Name:		mpg123
 Version:	1.13.4
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv2+
 Group:		Sound
 URL:		http://www.mpg123.de
@@ -178,11 +178,10 @@ rm -f doc//README.WIN32
 rm -f configure
 libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; autoconf
 
-export PATH="$PATH:/opt/kde3/bin"
-
 #gw this must be disabled for configure, else it will bail out
 %define Werror_cflags %nil
 %configure2_5x \
+    --with-module-suffix=.so \
     --with-default-audio=alsa \
     --enable-ipv6=yes \
     --enable-network=yes
