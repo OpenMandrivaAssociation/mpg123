@@ -1,5 +1,5 @@
 %define	major	0
-%define	libname	%mklibname mpg123_ %major
+%define	libname	%mklibname mpg123_ %{major}
 %define	devname	%mklibname -d mpg123
 
 Summary:	MPEG audio player
