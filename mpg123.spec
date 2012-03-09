@@ -225,6 +225,5 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 
 %files -n %{devname}
 %{_libdir}/libmpg123.so
-%{_libdir}/libmpg123.la
 %{_includedir}/mpg123.h
 %{_libdir}/pkgconfig/libmpg123.pc
