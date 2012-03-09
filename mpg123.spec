@@ -11,16 +11,16 @@ Group:		Sound
 URL:		http://www.mpg123.de
 Source0:	http://prdownloads.sourceforge.net/mpg123/mpg123-%version.tar.bz2
 Source1:	mp3license.tar.bz2
-BuildRequires:	libalsa-devel
+BuildRequires:	pkgconfig(alsa)
 BuildRequires:	libltdl-devel
-BuildRequires:	libjack-devel
-BuildRequires:	libnas-devel
-BuildRequires:	libportaudio-devel
-BuildRequires:	libpulseaudio-devel
-BuildRequires:	libSDL-devel
-BuildRequires:  esound-devel
-BuildRequires:  openal-devel
-BuildRequires:  zlib-devel
+BuildRequires:	pkgconfig(jack)
+BuildRequires:	nas-devel
+BuildRequires:	pkgconfig(portaudio-2.0)
+BuildRequires:	pkgconfig(libpulse)
+BuildRequires:	pkgconfig(sdl)
+BuildRequires:  pkgconfig(esound)
+BuildRequires:  pkgconfig(openal)
+BuildRequires:  pkgconfig(zlib)
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
