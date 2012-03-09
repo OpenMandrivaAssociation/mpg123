@@ -171,13 +171,12 @@ http://www.mpeg.org
 %prep
 %setup -q -a 1
 rm -f doc/README.WIN32
-
-%build
 rm -f configure
 libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; autoconf
 
+%build
 #gw this must be disabled for configure, else it will bail out
-%define Werror_cflags %nil
+%define Werror_cflags %{nil}
 %configure2_5x \
     --with-module-suffix=.so \
     --with-default-audio=alsa \
