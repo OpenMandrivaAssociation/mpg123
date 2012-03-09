@@ -199,7 +199,6 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 %{_libdir}/%{name}/output_dummy*
 %{_libdir}/%{name}/output_oss*
 
-
 %files pulse
 %{_libdir}/%{name}/output_pulse*
 
