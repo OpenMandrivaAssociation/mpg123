@@ -12,7 +12,7 @@ URL:		http://www.mpg123.de
 Source0:	http://prdownloads.sourceforge.net/mpg123/%{name}-%{version}.tar.bz2
 Source1:	mp3license.tar.bz2
 BuildRequires:	pkgconfig(alsa)
-BuildRequires:	libltdl-devel
+BuildRequires:	libtool-devel
 BuildRequires:	pkgconfig(jack)
 BuildRequires:	nas-devel
 BuildRequires:	pkgconfig(portaudio-2.0)
