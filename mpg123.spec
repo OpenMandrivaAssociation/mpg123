@@ -4,7 +4,7 @@
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.14.0
+Version:	1.14.1
 Release:	1
 License:	LGPLv2+
 Group:		Sound
