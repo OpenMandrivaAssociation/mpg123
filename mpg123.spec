@@ -11,6 +11,7 @@ Group:		Sound
 URL:		http://www.mpg123.de
 Source0:	http://prdownloads.sourceforge.net/mpg123/%{name}-%{version}.tar.bz2
 Source1:	mp3license.tar.bz2
+Patch0:		mpg123-automake-1.13.patch
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	libtool-devel
 BuildRequires:	pkgconfig(jack)
@@ -21,6 +22,13 @@ BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(esound)
 BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(zlib)
+
+%track
+prog %name = {
+	url = http://sourceforge.net/projects/mpg123/files/
+	version = %version
+	regex = %name-(__VER__)\.tar\.bz2
+}
 
 %description
 Mpg123 is a fast, free and portable MPEG audio player for Unix.
@@ -170,6 +178,7 @@ http://www.mpeg.org
 
 %prep
 %setup -q -a 1
+%apply_patches
 rm -f doc/README.WIN32
 rm -f configure
 libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; autoconf

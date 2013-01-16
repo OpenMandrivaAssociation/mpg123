@@ -1,0 +1,11 @@
+--- mpg123-1.14.4/configure.ac.bero	2013-01-16 01:19:45.017685419 +0100
++++ mpg123-1.14.4/configure.ac	2013-01-16 01:19:50.326621894 +0100
+@@ -26,7 +26,7 @@ AC_CANONICAL_HOST
+ 
+ dnl Version 1.7 of automake is recommended
+ AM_INIT_AUTOMAKE(1.7)
+-AM_CONFIG_HEADER(src/config.h)
++AC_CONFIG_HEADERS([src/config.h])
+ 
+ 
+ # You get strange symptoms like jack module build failing because the AC_C_CONST failed to detect the working const support.
