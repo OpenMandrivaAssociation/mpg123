@@ -4,14 +4,13 @@
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.14.4
+Version:	1.15.4
 Release:	1
 License:	LGPLv2+
 Group:		Sound
 URL:		http://www.mpg123.de
 Source0:	http://prdownloads.sourceforge.net/mpg123/%{name}-%{version}.tar.bz2
 Source1:	mp3license.tar.bz2
-Patch0:		mpg123-automake-1.13.patch
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	libtool-devel
 BuildRequires:	pkgconfig(jack)
@@ -200,7 +199,6 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 %files 
 %doc doc/* NEWS README AUTHORS ChangeLog
 %doc mp3license
-%defattr (-,root,root)
 %{_bindir}/*
 %{_mandir}/man1/*
 %dir %{_libdir}/%{name}
