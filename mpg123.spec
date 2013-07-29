@@ -5,16 +5,15 @@
 Summary:	MPEG audio player
 Name:		mpg123
 Version:	1.15.4
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		Sound
-URL:		http://www.mpg123.de
+Url:		http://www.mpg123.de
 Source0:	http://prdownloads.sourceforge.net/mpg123/%{name}-%{version}.tar.bz2
 Source1:	mp3license.tar.bz2
 BuildRequires:	libtool-devel
 BuildRequires:	nas-devel
 BuildRequires:	pkgconfig(alsa)
-BuildRequires:	pkgconfig(esound)
 BuildRequires:	pkgconfig(jack)
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(openal)
@@ -40,140 +39,68 @@ For information on the MP3 License, please visit:
 http://www.mpeg.org
 
 %package	pulse
-Group:		Sound
 Summary:	Pulse audio output plugin for mpg123
-Requires:	%{name} = %{version}
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
 
 %description pulse
-Mpg123 is a fast, free and portable MPEG audio player for Unix.
-It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
-full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
-is required. Mono and/or reduced quality playback (22 kHz or
-11 kHz) is possible on slow CPUs (like Intel 486).
-
-For information on the MP3 License, please visit:
-http://www.mpeg.org
+This package contains the pulseaudio plugin for %{name}.
 
 %package	jack
-Group:		Sound
 Summary:	Jack audio output plugin for mpg123
-Requires:	%{name} = %{version}
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
 
 %description	jack
-Mpg123 is a fast, free and portable MPEG audio player for Unix.
-It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
-full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
-is required. Mono and/or reduced quality playback (22 kHz or
-11 kHz) is possible on slow CPUs (like Intel 486).
-
-For information on the MP3 License, please visit:
-http://www.mpeg.org
+This package contains the jack plugin for %{name}.
 
 %package	portaudio
-Group:		Sound
 Summary:	Portaudio output plugin for mpg123
-Requires:	%{name} = %{version}
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
 
 %description	portaudio
-Mpg123 is a fast, free and portable MPEG audio player for Unix.
-It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
-full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
-is required. Mono and/or reduced quality playback (22 kHz or
-11 kHz) is possible on slow CPUs (like Intel 486).
-
-For information on the MP3 License, please visit:
-http://www.mpeg.org
+This package contains the portaudio plugin for %{name}.
 
 %package	nas
-Group:		Sound
 Summary:	NAS audio output plugin for mpg123
-Requires:	%{name} = %{version}
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
 
 %description	nas
-Mpg123 is a fast, free and portable MPEG audio player for Unix.
-It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
-full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
-is required. Mono and/or reduced quality playback (22 kHz or
-11 kHz) is possible on slow CPUs (like Intel 486).
-
-For information on the MP3 License, please visit:
-http://www.mpeg.org
+This package contains the nas plugin for %{name}.
 
 %package	sdl
-Group:		Sound
 Summary:	SDL audio output plugin for mpg123
-Requires:	%{name} = %{version}
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
 
 %description	sdl
-Mpg123 is a fast, free and portable MPEG audio player for Unix.
-It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
-full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
-is required. Mono and/or reduced quality playback (22 kHz or
-11 kHz) is possible on slow CPUs (like Intel 486).
-
-For information on the MP3 License, please visit:
-http://www.mpeg.org
-
-%package	esd
-Group:		Sound
-Summary:	Esound audio output plugin for mpg123
-Requires:	%{name} = %{version}
-
-%description	esd
-Mpg123 is a fast, free and portable MPEG audio player for Unix.
-It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
-full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
-is required. Mono and/or reduced quality playback (22 kHz or
-11 kHz) is possible on slow CPUs (like Intel 486).
-
-For information on the MP3 License, please visit:
-http://www.mpeg.org
+This package contains the sdl plugin for %{name}.
 
 %package	openal
-Group:		Sound
 Summary:	OpenAL audio output plugin for mpg123
-Requires:	%{name} = %{version}
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
 
 %description	openal
-Mpg123 is a fast, free and portable MPEG audio player for Unix.
-It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
-full CD quality playback (44 kHz, 16 bit, stereo) a fast CPU
-is required. Mono and/or reduced quality playback (22 kHz or
-11 kHz) is possible on slow CPUs (like Intel 486).
-
-For information on the MP3 License, please visit:
-http://www.mpeg.org
+This package contains the openal plugin for %{name}.
 
 %package -n	%{libname}
-Group:		System/Libraries
 Summary:	MPEG audio decoding library
+Group:		System/Libraries
 
 %description -n	%{libname}
-libmpg123 is a fast, free and portable MPEG audio decoding library for Unix.
-It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For full CD
-quality playback (44 kHz, 16 bit, stereo) a fast CPU is required. Mono
-and/or reduced quality playback (22 kHz or 11 kHz) is possible on slow
-CPUs (like Intel 486).
-
-For information on the MP3 License, please visit:
-http://www.mpeg.org
+This package contains the share library for %{name}.
 
 %package -n	%{devname}
-Group:		Development/C
 Summary:	MPEG audio decoding library - development files
+Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
-Provides:	libmpg123-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{devname}
-libmpg123 is a fast, free and portable MPEG audio decoding library for Unix.
-It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For full CD
-quality playback (44 kHz, 16 bit, stereo) a fast CPU is required. Mono
-and/or reduced quality playback (22 kHz or 11 kHz) is possible on slow
-CPUs (like Intel 486).
-
-For information on the MP3 License, please visit:
-http://www.mpeg.org
+This package includes the development files for %{name}.
 
 %prep
 %setup -q -a 1
@@ -186,10 +113,10 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 #gw this must be disabled for configure, else it will bail out
 %define Werror_cflags %{nil}
 %configure2_5x \
-    --with-module-suffix=.so \
-    --with-default-audio=alsa \
-    --enable-ipv6=yes \
-    --enable-network=yes
+	--with-module-suffix=.so \
+	--with-default-audio=alsa \
+	--enable-ipv6=yes \
+	--enable-network=yes
 
 %make CFLAGS="%{optflags} -Wformat -Werror=format-security"
 
@@ -220,9 +147,6 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 
 %files sdl
 %{_libdir}/%{name}/output_sdl*
-
-%files esd
-%{_libdir}/%{name}/output_esd*
 
 %files openal
 %{_libdir}/%{name}/output_openal*
