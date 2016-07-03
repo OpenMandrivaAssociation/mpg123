@@ -1,11 +1,13 @@
 %define	major	0
 %define	libname	%mklibname mpg123_ %{major}
+%define	libout	%mklibname out123_ %{major}
 %define	devname	%mklibname -d mpg123
+%define	devout	%mklibname -d out123
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.22.1
-Release:	5
+Version:	1.23.6
+Release:	1
 License:	LGPLv2+
 Group:		Sound
 Url:		http://www.mpg123.de
@@ -93,6 +95,24 @@ Group:		System/Libraries
 %description -n	%{libname}
 This package contains the share library for %{name}.
 
+%package -n	%{libout}
+Summary:	MPEG audio decoding library
+Group:		System/Libraries
+
+%description -n	%{libout}
+This package contains the share library for %{name}.
+
+%package -n	%{devout}
+Summary:	MPEG audio decoding library - development files
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libout} = %{version}-%{release}
+Requires:	%{devname} = %{version}-%{release}
+Provides:	%{name}-out-devel = %{version}-%{release}
+
+%description -n %{devout}
+This package includes the development files for %{name}.
+
 %package -n	%{devname}
 Summary:	MPEG audio decoding library - development files
 Group:		Development/C
@@ -112,7 +132,7 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 %build
 #gw this must be disabled for configure, else it will bail out
 %define Werror_cflags %{nil}
-%configure2_5x \
+%configure \
 	--with-module-suffix=.so \
 	--with-default-audio=alsa \
 	--enable-ipv6=yes \
@@ -154,8 +174,16 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 %files -n %{libname}
 %{_libdir}/libmpg123.so.%{major}*
 
+%files -n %{libout}
+%{_libdir}/libout123.so.%{major}*
+
+%files -n %{devout}
+%{_libdir}/pkgconfig/libout123.pc
+%{_includedir}/out123.h
+%{_includedir}/fmt123.h
+%{_libdir}/libout123.so
+
 %files -n %{devname}
 %{_libdir}/libmpg123.so
 %{_includedir}/mpg123.h
 %{_libdir}/pkgconfig/libmpg123.pc
-
