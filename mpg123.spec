@@ -7,7 +7,7 @@
 Summary:	MPEG audio player
 Name:		mpg123
 Version:	1.23.6
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		Sound
 Url:		http://www.mpg123.de
@@ -180,10 +180,10 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 %files -n %{devout}
 %{_libdir}/pkgconfig/libout123.pc
 %{_includedir}/out123.h
-%{_includedir}/fmt123.h
 %{_libdir}/libout123.so
 
 %files -n %{devname}
 %{_libdir}/libmpg123.so
 %{_includedir}/mpg123.h
+%{_includedir}/fmt123.h
 %{_libdir}/pkgconfig/libmpg123.pc
