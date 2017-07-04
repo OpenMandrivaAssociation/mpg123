@@ -6,7 +6,7 @@
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.24.0
+Version:	1.25.1
 Release:	1
 License:	LGPLv2+
 Group:		Sound
@@ -143,7 +143,7 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 %install
 %makeinstall_std
 
-%files 
+%files
 %doc doc/* NEWS README AUTHORS ChangeLog
 %doc mp3license
 %{_bindir}/*
