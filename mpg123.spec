@@ -6,12 +6,12 @@
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.25.7
+Version:	1.25.8
 Release:	1
 License:	LGPLv2+
 Group:		Sound
 Url:		http://www.mpg123.de
-Source0:	http://prdownloads.sourceforge.net/mpg123/%{name}-%{version}.tar.bz2
+Source0:	http://www.mpg123.de/download/mpg123-%{version}.tar.bz2
 Source1:	mp3license.tar.bz2
 BuildRequires:	libtool-devel
 BuildRequires:	nas-devel
