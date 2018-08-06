@@ -23,13 +23,6 @@ BuildRequires:	pkgconfig(portaudio-2.0)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(zlib)
 
-%track
-prog %{name} = {
-	url = http://sourceforge.net/projects/mpg123/files/
-	version = %{version}
-	regex = %{name}-(__VER__)\.tar\.bz2
-}
-
 %description
 Mpg123 is a fast, free and portable MPEG audio player for Unix.
 It supports MPEG 1.0/2.0 layers 1, 2 and 3 ("mp3" files).  For
