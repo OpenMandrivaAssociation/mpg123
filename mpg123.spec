@@ -117,7 +117,7 @@ This package includes the development files for %{name}.
 
 %prep
 %setup -q -a 1
-%apply_patches
+%autopatch -p1
 rm -f doc/README.WIN32
 rm -f configure
 libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; autoconf
