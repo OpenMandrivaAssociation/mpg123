@@ -1,12 +1,14 @@
 %define	major	0
 %define	libname	%mklibname mpg123_ %{major}
 %define	libout	%mklibname out123_ %{major}
+%define	libsyn	%mklibname syn123_ %{major}
 %define	devname	%mklibname -d mpg123
 %define	devout	%mklibname -d out123
+%define	devsyn	%mklibname -d syn123
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.25.13
+Version:	1.26.1
 Release:	1
 License:	LGPLv2+
 Group:		Sound
@@ -89,11 +91,30 @@ Group:		System/Libraries
 This package contains the share library for %{name}.
 
 %package -n	%{libout}
-Summary:	MPEG audio decoding library
-Group:		System/Libraries
+summary:	mpeg audio decoding library
+group:		system/libraries
 
 %description -n	%{libout}
-This package contains the share library for %{name}.
+this package contains the share library for %{name}.
+
+%package -n	%{libsyn}
+summary:	mpeg audio decoding library
+group:		system/libraries
+
+%description -n	%{libsyn}
+this package contains the share library for %{name}.
+
+%package -n	%{devsyn}
+Summary:	MPEG audio decoding library - development files
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libout} = %{version}-%{release}
+Requires:	%{libsyn} = %{version}-%{release}
+Requires:	%{devname} = %{version}-%{release}
+Provides:	%{name}-syn-devel = %{version}-%{release}
+
+%description -n %{devsyn}
+This package includes the development files for %{name}.
 
 %package -n	%{devout}
 Summary:	MPEG audio decoding library - development files
@@ -170,10 +191,18 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 %files -n %{libout}
 %{_libdir}/libout123.so.%{major}*
 
+%files -n %{libsyn}
+%{_libdir}/libsyn123.so.%{major}*
+
 %files -n %{devout}
 %{_libdir}/pkgconfig/libout123.pc
 %{_includedir}/out123.h
 %{_libdir}/libout123.so
+
+%files -n %{devsyn}
+%{_libdir}/pkgconfig/libsyn123.pc
+%{_libdir}/libsyn123.so
+%{_includedir}/syn123.h
 
 %files -n %{devname}
 %{_libdir}/libmpg123.so
