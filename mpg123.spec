@@ -85,6 +85,8 @@ This package contains the openal plugin for %{name}.
 
 %package -n	%{libname}
 Summary:	MPEG audio decoding library
+Requires:	%{libout} = %{version}-%{release}
+Requires:	%{libsyn} = %{version}-%{release}
 Group:		System/Libraries
 
 %description -n	%{libname}
