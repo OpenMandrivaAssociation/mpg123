@@ -1,3 +1,8 @@
+# mpg123 is used by wine
+%ifarch %{x86_64}
+%bcond_without compat32
+%endif
+
 %define	major	0
 %define	libname	%mklibname mpg123_ %{major}
 %define	libout	%mklibname out123_ %{major}
@@ -5,6 +10,12 @@
 %define	devname	%mklibname -d mpg123
 %define	devout	%mklibname -d out123
 %define	devsyn	%mklibname -d syn123
+%define	lib32name	%mklib32name mpg123_ %{major}
+%define	lib32out	%mklib32name out123_ %{major}
+%define	lib32syn	%mklib32name syn123_ %{major}
+%define	dev32name	%mklib32name -d mpg123
+%define	dev32out	%mklib32name -d out123
+%define	dev32syn	%mklib32name -d syn123
 
 Summary:	MPEG audio player
 Name:		mpg123
@@ -22,8 +33,15 @@ BuildRequires:	pkgconfig(jack)
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(portaudio-2.0)
-BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	pkgconfig(zlib)
+%if %{with compat32}
+BuildRequires:	devel(libasound)
+BuildRequires:	devel(libjack)
+BuildRequires:	devel(libpulse)
+BuildRequires:	devel(libopenal)
+BuildRequires:	devel(libz)
+%endif
 
 %description
 Mpg123 is a fast, free and portable MPEG audio player for Unix.
@@ -99,25 +117,6 @@ group:		system/libraries
 %description -n	%{libout}
 this package contains the share library for %{name}.
 
-%package -n	%{libsyn}
-summary:	mpeg audio decoding library
-group:		system/libraries
-
-%description -n	%{libsyn}
-this package contains the share library for %{name}.
-
-%package -n	%{devsyn}
-Summary:	MPEG audio decoding library - development files
-Group:		Development/C
-Requires:	%{libname} = %{version}-%{release}
-Requires:	%{libout} = %{version}-%{release}
-Requires:	%{libsyn} = %{version}-%{release}
-Requires:	%{devname} = %{version}-%{release}
-Provides:	%{name}-syn-devel = %{version}-%{release}
-
-%description -n %{devsyn}
-This package includes the development files for %{name}.
-
 %package -n	%{devout}
 Summary:	MPEG audio decoding library - development files
 Group:		Development/C
@@ -129,6 +128,21 @@ Provides:	%{name}-out-devel = %{version}-%{release}
 %description -n %{devout}
 This package includes the development files for %{name}.
 
+%package -n	%{libsyn}
+Summary:	MPEG audio decoding library
+Group:		System/Libraries
+
+%description -n	%{libsyn}
+This package contains the share library for %{name}.
+
+%package -n %{devsyn}
+Summary:	MPEG audio decoding library - development files
+Group:		Development/C
+Requires:	%{libsyn} = %{version}-%{release}
+
+%description -n %{devsyn}
+MPEG audio decoding library - development files
+
 %package -n	%{devname}
 Summary:	MPEG audio decoding library - development files
 Group:		Development/C
@@ -138,26 +152,100 @@ Provides:	%{name}-devel = %{version}-%{release}
 %description -n %{devname}
 This package includes the development files for %{name}.
 
+%if %{with compat32}
+%package -n	%{lib32name}
+Summary:	MPEG audio decoding library (32-bit)
+Group:		System/Libraries
+
+%description -n	%{lib32name}
+This package contains the share library for %{name}.
+
+%package -n	%{lib32out}
+Summary:	MPEG audio decoding library (32-bit)
+Group:		System/Libraries
+
+%description -n	%{lib32out}
+This package contains the share library for %{name}.
+
+%package -n	%{dev32out}
+Summary:	MPEG audio decoding library - development files (32-bit)
+Group:		Development/C
+Requires:	%{devout} = %{version}-%{release}
+Requires:	%{lib32name} = %{version}-%{release}
+Requires:	%{lib32out} = %{version}-%{release}
+Requires:	%{dev32name} = %{version}-%{release}
+Provides:	%{name}-out-devel = %{version}-%{release}
+
+%description -n %{dev32out}
+This package includes the development files for %{name}.
+
+%package -n	%{dev32name}
+Summary:	MPEG audio decoding library - development files (32-bit)
+Group:		Development/C
+Requires:	%{devname} = %{version}-%{release}
+Requires:	%{lib32name} = %{version}-%{release}
+
+%description -n %{dev32name}
+This package includes the development files for %{name}.
+
+%package -n	%{lib32syn}
+Summary:	MPEG audio decoding library (32-bit)
+Group:		System/Libraries
+
+%description -n	%{lib32syn}
+This package contains the share library for %{name}.
+
+%package -n %{dev32syn}
+Summary:	MPEG audio decoding library - development files
+Group:		Development/C
+Requires:	%{devsyn} = %{version}-%{release}
+Requires:	%{lib32syn} = %{version}-%{release}
+
+%description -n %{dev32syn}
+MPEG audio decoding library - development files
+%endif
+
 %prep
 %setup -q -a 1
 %autopatch -p1
 rm -f doc/README.WIN32
 rm -f configure
 libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; autoconf
+#define Werror_cflags %{nil}
 
-%build
-#gw this must be disabled for configure, else it will bail out
-%define Werror_cflags %{nil}
+export CONFIGURE_TOP="$(pwd)"
+
+%if %{with compat32}
+mkdir build32
+cd build32
+%configure32 \
+	--with-cpu=x86 \
+	--with-module-suffix=.so \
+	--with-default-audio=alsa \
+	--enable-ipv6=yes \
+	--enable-network=yes
+cd ..
+%endif
+
+mkdir buildnative
+cd buildnative
 %configure \
 	--with-module-suffix=.so \
 	--with-default-audio=alsa \
 	--enable-ipv6=yes \
 	--enable-network=yes
 
-%make CFLAGS="%{optflags} -Wformat -Werror=format-security"
+%build
+%if %{with compat32}
+%make_build -C build32
+%endif
+%make_build -C buildnative CFLAGS="%{optflags} -Wformat -Werror=format-security"
 
 %install
-%makeinstall_std
+%if %{with compat32}
+%make_install -C build32
+%endif
+%make_install -C buildnative
 
 %files
 %doc doc/* NEWS README AUTHORS ChangeLog
@@ -211,3 +299,30 @@ libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; a
 %{_includedir}/mpg123.h
 %{_includedir}/fmt123.h
 %{_libdir}/pkgconfig/libmpg123.pc
+
+%if %{with compat32}
+%files -n %{lib32name}
+%{_prefix}/lib/libmpg123.so.%{major}*
+%dir %{_prefix}/lib/mpg123
+# FIXME does it make sense to split the various outputs
+# into different subpackages?
+%{_prefix}/lib/mpg123/output_*.so
+
+%files -n %{lib32out}
+%{_prefix}/lib/libout123.so.%{major}*
+
+%files -n %{lib32syn}
+%{_prefix}/lib/libsyn123.so.%{major}*
+
+%files -n %{dev32out}
+%{_prefix}/lib/pkgconfig/libout123.pc
+%{_prefix}/lib/libout123.so
+
+%files -n %{dev32name}
+%{_prefix}/lib/libmpg123.so
+%{_prefix}/lib/pkgconfig/libmpg123.pc
+
+%files -n %{dev32syn}
+%{_prefix}/lib/pkgconfig/libsyn123.pc
+%{_prefix}/lib/libsyn123.so
+%endif
