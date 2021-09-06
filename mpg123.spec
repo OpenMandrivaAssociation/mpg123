@@ -25,7 +25,6 @@ License:	LGPLv2+
 Group:		Sound
 Url:		http://www.mpg123.de
 Source0:	http://www.mpg123.de/download/mpg123-%{version}.tar.bz2
-Source1:	mp3license.tar.bz2
 BuildRequires:	libtool-devel
 BuildRequires:	nas-devel
 BuildRequires:	pkgconfig(alsa)
@@ -206,8 +205,7 @@ MPEG audio decoding library - development files
 %endif
 
 %prep
-%setup -q -a 1
-%autopatch -p1
+%autosetup -p1
 rm -f doc/README.WIN32
 rm -f configure
 libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; autoconf
@@ -249,7 +247,6 @@ cd buildnative
 
 %files
 %doc doc/* NEWS README AUTHORS ChangeLog
-%doc mp3license
 %{_bindir}/*
 %{_mandir}/man1/*
 %dir %{_libdir}/%{name}
