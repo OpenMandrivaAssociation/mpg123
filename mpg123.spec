@@ -35,6 +35,7 @@ BuildRequires:	pkgconfig(portaudio-2.0)
 BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	pkgconfig(zlib)
 %if %{with compat32}
+BuildRequires:	libc6
 BuildRequires:	devel(libasound)
 BuildRequires:	devel(libjack)
 BuildRequires:	devel(libpulse)
