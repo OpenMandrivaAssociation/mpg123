@@ -19,7 +19,7 @@
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.30.1
+Version:	1.31.0
 Release:	1
 License:	LGPLv2+
 Group:		Sound
@@ -33,6 +33,7 @@ BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(portaudio-2.0)
 BuildRequires:	pkgconfig(sdl2)
+BuildRequires:	pkgconfig(sndio)
 BuildRequires:	pkgconfig(zlib)
 %if %{with compat32}
 BuildRequires:	libc6
@@ -92,6 +93,14 @@ Requires:	%{name} = %{version}-%{release}
 
 %description	sdl
 This package contains the sdl plugin for %{name}.
+
+%package	sndio
+Summary:	SNDIO audio output plugin for mpg123
+Group:		Sound
+Requires:	%{name} = %{version}-%{release}
+
+%description	sndio
+This package contains the SNDIO plugin for %{name}.
 
 %package	openal
 Summary:	OpenAL audio output plugin for mpg123
@@ -269,6 +278,9 @@ cd buildnative
 
 %files sdl
 %{_libdir}/%{name}/output_sdl*
+
+%files sndio
+%{_libdir}/%{name}/output_sndio*
 
 %files openal
 %{_libdir}/%{name}/output_openal*
