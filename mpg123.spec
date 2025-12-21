@@ -25,6 +25,11 @@ License:	LGPLv2+
 Group:		Sound
 Url:		https://www.mpg123.de
 Source0:	https://www.mpg123.de/download/mpg123-%{version}.tar.bz2
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	libtool-devel
 BuildRequires:	nas-devel
 BuildRequires:	pkgconfig(alsa)
