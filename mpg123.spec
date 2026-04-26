@@ -19,7 +19,7 @@
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.33.3
+Version:	1.33.5
 Release:	1
 License:	LGPLv2+
 Group:		Sound
@@ -27,10 +27,8 @@ Url:		https://www.mpg123.de
 Source0:	https://www.mpg123.de/download/mpg123-%{version}.tar.bz2
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
-BuildRequires:	libtool-devel
 BuildRequires:	nas-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(jack)
@@ -48,6 +46,9 @@ BuildRequires:	devel(libpulse)
 BuildRequires:	devel(libopenal)
 BuildRequires:	devel(libz)
 %endif
+
+%patchlist
+mpg123-build32.patch
 
 %description
 Mpg123 is a fast, free and portable MPEG audio player for Unix.
@@ -223,7 +224,7 @@ MPEG audio decoding library - development files
 %autosetup -p1
 rm -f doc/README.WIN32
 rm -f configure
-libtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; autoconf
+slibtoolize --force --copy; aclocal; autoheader; automake --add-missing --copy; autoconf
 #define Werror_cflags %{nil}
 
 export CONFIGURE_TOP="$(pwd)"
@@ -231,13 +232,21 @@ export CONFIGURE_TOP="$(pwd)"
 %if %{with compat32}
 mkdir build32
 cd build32
+AM_CPPFLAGS="%{optflags} -isystem %{_includedir}" \
+CFLAGS="%{optflags} -isystem %{_includedir}" \
+LDFLAGS="%{build_ldflags} -L%{_prefix}/lib" \
 %configure32 \
+	--target=i686-openmandriva-linux-gnu \
+	--host=i686-openmandriva-linux-gnu \
 	--with-cpu=x86 \
 	--with-module-suffix=.so \
 	--with-default-audio=alsa \
 	--enable-ipv6=yes \
 	--enable-network=yes
 cd ..
+unset AM_CPPFLAGS
+unset CFLAGS
+unset LDFLAGS
 %endif
 
 mkdir buildnative
