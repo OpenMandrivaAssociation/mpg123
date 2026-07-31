@@ -19,7 +19,7 @@
 
 Summary:	MPEG audio player
 Name:		mpg123
-Version:	1.33.5
+Version:	1.33.6
 Release:	1
 License:	LGPLv2+
 Group:		Sound
@@ -48,7 +48,7 @@ BuildRequires:	devel(libz)
 %endif
 
 %patchlist
-mpg123-build32.patch
+# dropped (no longer applies): mpg123-build32.patch
 
 %description
 Mpg123 is a fast, free and portable MPEG audio player for Unix.
