@@ -1,0 +1,22 @@
+--- mpg123-1.33.7/configure.ac.omv~
++++ mpg123-1.33.7/configure.ac
+@@ -313,7 +313,7 @@ int main() {
+     AC_SEARCH_LIBS(dlopen, dl)
+     AC_SEARCH_LIBS(dlsym, dl)
+     AC_SEARCH_LIBS(dlclose, dl)
+-    AC_CHECK_HEADER(dlfcn.h)
++    AC_CHECK_HEADERS([dlfcn.h])
+     AC_CHECK_FUNCS(dlopen dlsym dlclose, [ have_dl=yes ], [ dl_missing=yes] )
+     LIBS=$oldLIBS
+     # A better way to check if the library was really needed?
+@@ -355,7 +355,9 @@ else
+   # Enable module support in source code
+   AC_DEFINE( USE_MODULES, 1, [Define if modules are enabled] )
+   # Export the module file suffix as LT_MODULE_EXT
+-  LT_SYS_MODULE_EXT
++  # LT_SYS_MODULE_EXT needs classic libtool's _LT_SYS_DYNAMIC_LINKER;
++  # slibtool does not provide it, so hardcode the ELF shared module suffix.
++  AC_DEFINE([LT_MODULE_EXT], [".so"], [Define to the extension used for runtime loadable modules.])
+ fi
+ AM_CONDITIONAL( [HAVE_MODULES], [test "x$modules" = xenabled] )
+ 

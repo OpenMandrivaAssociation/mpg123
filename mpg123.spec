@@ -48,8 +48,9 @@ BuildRequires:	devel(libz)
 %endif
 
 %patchlist
-# slibtoolize+autoconf drops HAVE_DLFCN_H (upstream AC_CHECK_HEADER alone)
-mpg123-build32.patch
+# slibtoolize lacks classic libtool's LT_SYS_MODULE_EXT/_LT_SYS_DYNAMIC_LINKER
+# and AC_CHECK_HEADER alone does not define HAVE_DLFCN_H after autoheader.
+mpg123-slibtool-configure.patch
 
 %description
 Mpg123 is a fast, free and portable MPEG audio player for Unix.
@@ -240,7 +241,6 @@ LDFLAGS="%{build_ldflags} -L%{_prefix}/lib" \
 	--target=i686-openmandriva-linux-gnu \
 	--host=i686-openmandriva-linux-gnu \
 	--with-cpu=x86 \
-	--with-module-suffix=.so \
 	--with-default-audio=alsa \
 	--enable-ipv6=yes \
 	--enable-network=yes
@@ -253,7 +253,6 @@ unset LDFLAGS
 mkdir buildnative
 cd buildnative
 %configure \
-	--with-module-suffix=.so \
 	--with-default-audio=alsa \
 	--enable-ipv6=yes \
 	--enable-network=yes
